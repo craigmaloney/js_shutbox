@@ -46,15 +46,20 @@ tiles.onclick = function() {
 
 
 roll_button.onclick = function() {
-    var tile_input = tiles.getElementsByTagName('input');
-    for (var i = 0, length = tile_input.length; i < length; i++) {
-        if (tile_input[i].type == 'checkbox') {
-           if (tile_input[i].checked) {
-                tile_input[i].disabled = true;
-           }
-        }
 
+    var checked_sum = tile_sum();
+    if (dice_sum == checked_sum) {
+
+        var tile_input = tiles.getElementsByTagName('input');
+        for (var i = 0, length = tile_input.length; i < length; i++) {
+            if (tile_input[i].type == 'checkbox') {
+            if (tile_input[i].checked) {
+                    tile_input[i].disabled = true;
+            }
+            }
+
+        }
+        display_sum_total();
+        roll_both_dice();
     }
-    display_sum_total();
-    roll_both_dice();
 };
