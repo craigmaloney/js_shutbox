@@ -6,6 +6,7 @@ var dice2_label = document.getElementById('dice2');
 var dice1;
 var dice2;
 var dice_sum;
+var tile_array = [];
 
 roll_both_dice();
 
@@ -46,20 +47,49 @@ tiles.onclick = function() {
 
 
 roll_button.onclick = function() {
-
     var checked_sum = tile_sum();
     if (dice_sum == checked_sum) {
 
         var tile_input = tiles.getElementsByTagName('input');
         for (var i = 0, length = tile_input.length; i < length; i++) {
             if (tile_input[i].type == 'checkbox') {
-            if (tile_input[i].checked) {
-                    tile_input[i].disabled = true;
-            }
+                if (tile_input[i].checked) {
+                        tile_input[i].disabled = true;
+                }
             }
 
         }
         display_sum_total();
         roll_both_dice();
+        if (check_end(dice_sum) === false) {
+            alert('No more valid moves');
+        }
     }
 };
+
+function check_end(sum_tiles) {
+    var orig_sum = sum_tiles;
+    if (sum_tiles === 0) {
+        return true;
+    }
+
+    if (sum_tiles > 9) {
+       sum_tiles = 9;
+    } 
+
+    for (var i=sum_tiles; i >= 1; i--) {
+        var tile_input = tiles.getElementsByTagName('input')[i - 1];
+        if (tile_input.disabled === false) {
+            if ((orig_sum - i) >= i) {
+                return false;
+            }
+
+            var result = check_end(orig_sum - i);
+            if (result) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
