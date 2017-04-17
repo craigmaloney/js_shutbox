@@ -6,7 +6,6 @@ const dice2_label = document.getElementById("dice2");
 var dice1;
 var dice2;
 var dice_sum;
-var tile_array = [];
 
 roll_both_dice();
 
@@ -16,9 +15,9 @@ function tile_sum() {
     var i;
     for (i = 0; i < tile_input.length; i++) {
         if (tile_input[i].type === "checkbox") {
-           if (tile_input[i].checked && tile_input[i].disabled === false) {
+            if (tile_input[i].checked && tile_input[i].disabled === false) {
                 checked_sum += parseInt(tile_input[i].value, 10);
-           }
+            }
         }
 
     }
@@ -60,7 +59,7 @@ function check_end(sum_tiles) {
        sum_tiles = 9;
     } 
 
-    for (i=sum_tiles; i >= 1; i--) {
+    for (i = sum_tiles; i >= 1; i--) {
         tile_input = tiles.getElementsByTagName("input")[i - 1];
         if (tile_input.disabled === false) {
             if ((orig_sum - i) >= i) {
