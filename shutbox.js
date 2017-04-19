@@ -11,10 +11,9 @@ roll_both_dice();
 
 function tile_sum() {
     "use strict";
-    var checked_sum = 0;
-    var tile_input = tiles.getElementsByTagName("input");
-    var i;
-    for (i = 0; i < tile_input.length; i++) {
+    let checked_sum = 0;
+    const tile_input = tiles.getElementsByTagName("input");
+    for (let i = 0; i < tile_input.length; i++) {
         if (tile_input[i].type === "checkbox") {
             if (tile_input[i].checked && tile_input[i].disabled === false) {
                 checked_sum += parseInt(tile_input[i].value, 10);
@@ -27,7 +26,7 @@ function tile_sum() {
 
 function display_sum_total() {
     "use strict";
-    var checked_sum = tile_sum();
+    const checked_sum = tile_sum();
     sum_label.textContent = checked_sum;
 }
 
@@ -52,9 +51,7 @@ tiles.onclick = function() {
 
 function check_end(sum_tiles) {
     "use strict";
-    var orig_sum = sum_tiles;
-    var i;
-    var tile_input;
+    const orig_sum = sum_tiles;
     var result;
 
     if (sum_tiles === 0) {
@@ -65,8 +62,8 @@ function check_end(sum_tiles) {
         sum_tiles = 9;
     } 
 
-    for (i = sum_tiles; i >= 1; i--) {
-        tile_input = tiles.getElementsByTagName("input")[i - 1];
+    for (let i = sum_tiles; i >= 1; i--) {
+        let tile_input = tiles.getElementsByTagName("input")[i - 1];
         if (tile_input.disabled === false) {
             if ((orig_sum - i) >= i) {
                 return false;
